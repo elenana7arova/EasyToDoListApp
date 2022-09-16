@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  ToDoApp (rus)
+
+  Created by Elena Nazarova on 16.09.2022.
+  
+*/
+
+"Main.title" = "Список задач";
+"Common.cancelTitle" = "Отмена";
+"Common.okTitle" = "Ок";
+"Common.yesTitle" = "Да";
+"Task.createTitle" = "Создайте задачу";
+"Task.updateTitle" = "Измените название задачи";
+"Task.removeConfirmationTitle" = "Вы уверены, что хотите удалить задачу?";
