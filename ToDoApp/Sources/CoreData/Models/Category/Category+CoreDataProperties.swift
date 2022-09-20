@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-
-extension Category {
+@objc(Category)
+public class Category: NSManagedObject, ObjectWithName {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Category> {
         return NSFetchRequest<Category>(entityName: "Category")
@@ -22,7 +22,8 @@ extension Category {
 
 }
 
-// MARK: Generated accessors for tasks
+// MARK: - Generated accessors for tasks
+
 extension Category {
 
     @objc(addTasksObject:)
@@ -39,6 +40,6 @@ extension Category {
 
 }
 
-extension Category : Identifiable {
+// MARK: - Identifiable
 
-}
+extension Category: Identifiable {}

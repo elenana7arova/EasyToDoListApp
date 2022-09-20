@@ -7,10 +7,21 @@
 */
 
 "Main.title" = "To Do List";
+
 "Common.cancelTitle" = "Cancel";
 "Common.okTitle" = "Ok";
 "Common.yesTitle" = "Yes";
+"Common.createTitle" = "Create";
+"Common.updateTitle" = "Update";
+"Common.removeTitle" = "Remove";
+"Common.сonfirmationTitle" = "Are you sure you want to";
+"Common.creationOptions" = "Do you want to create a task or a category?";
+
 "Category.default" = "Uncategorized";
-"Task.createTitle" = "Create a task";
-"Task.updateTitle" = "Update the name of the task";
-"Task.removeConfirmationTitle" = "Are you sure you want to delete the task?";
+"Category.options" = "What do you want to do with the category?";
+"Category.choose" = "Choose the category";
+"Category.chooseNew" = "Choose a new category";
+"Category.disclaimer" = "You can't remove the default category";
+
+"Task.title" = "task";
+"Category.title" = "category";

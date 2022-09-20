@@ -9,7 +9,8 @@
 import Foundation
 import CoreData
 
-extension Task {
+@objc(Task)
+public class Task: NSManagedObject, ObjectWithName {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
         return NSFetchRequest<Task>(entityName: "Task")
@@ -22,6 +23,6 @@ extension Task {
 
 }
 
-extension Task : Identifiable {
+// MARK: - Identifiable
 
-}
+extension Task: Identifiable {}

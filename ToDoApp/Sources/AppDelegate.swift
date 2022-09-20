@@ -12,11 +12,11 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private let userDefaults = UserDefaults.standard
     private let crudManager = CRUDManager()
-    private var isFirstLaunch: Bool {
-        return self.userDefaults.bool(forKey: Constants.isFirstLaunchKey)
+    private var wasAlreadyLaunched: Bool {
+        return self.userDefaults.bool(forKey: Constants.wasAlreadyLaunchedKey)
     }
     private enum Constants {
-        static let isFirstLaunchKey = "isFirstLaunch"
+        static let wasAlreadyLaunchedKey = "wasAlreadyLaunched"
         static let defaultCategoryName = "Category.default".localized
     }
     
@@ -31,19 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.navigationBar.prefersLargeTitles = true
         window.rootViewController = navController
         window.makeKeyAndVisible()
-        self.setUserDefaults()
-        self.createDefaultData()
+        self.setDefaults()
         self.window = window
         return true
     }
     
-    private func setUserDefaults() {
-        guard !self.isFirstLaunch else { return }
-        self.userDefaults.set(true, forKey: Constants.isFirstLaunchKey)
+    private func setDefaults() {
+        guard !self.wasAlreadyLaunched else { return }
+        self.createDefaultData()
+        self.userDefaults.set(true, forKey: Constants.wasAlreadyLaunchedKey)
     }
     
     private func createDefaultData() {
-        guard !self.isFirstLaunch else { return }
         self.crudManager.create(ofType: Category.self, withKeyValue: [
             "name": Constants.defaultCategoryName,
             "created": Date(),

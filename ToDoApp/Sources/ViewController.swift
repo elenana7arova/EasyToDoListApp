@@ -8,7 +8,8 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    typealias Closure = () -> Void
     
     private var tableView: UITableView?
     private let crudManager = CRUDManager()
@@ -20,9 +21,17 @@ class ViewController: UIViewController {
             static let cancelTitle = "Common.cancelTitle".localized
             static let okTitle = "Common.okTitle".localized
             static let yesTitle = "Common.yesTitle".localized
-            static let createTask = "Task.createTitle".localized
-            static let updateTask = "Task.updateTitle".localized
-            static let deleteTaskConfirmation = "Task.removeConfirmationTitle".localized
+            static let create = "Common.createTitle".localized
+            static let update = "Common.updateTitle".localized
+            static let remove = "Common.removeTitle".localized
+            static let confirmation = "Common.сonfirmationTitle".localized
+            static let task = "Task.title".localized
+            static let category = "Category.title".localized
+            static let createOptions = "Common.creationOptions".localized
+            static let categoryOptions = "Category.options".localized
+            static let chooseCategory = "Category.choose".localized
+            static let chooseNewCategory = "Category.chooseNew".localized
+            static let categoryDisclaimer = "Category.disclaimer".localized
         }
         enum Image {
             static let addImage = UIImage(systemName: "plus")!
@@ -76,115 +85,113 @@ class ViewController: UIViewController {
         }
     }
     
-    private func showAlertWithTextfield(title: String, defaultTitle: String? = nil, completion: @escaping (String) -> Void) {
-        let alert = UIAlertController(title: title, 
-                                      message: nil, 
-                                      preferredStyle: .alert)
-        alert.addTextField()
-        guard let textField = alert.textFields?.first else { return }
-        textField.text = defaultTitle ?? ""
-        
-        let doneAction = UIAlertAction(title: Constants.String.okTitle, style: .default) { _ in
-            guard let text = textField.text,
-                  !text.isEmpty else { return }
-            textField.text = defaultTitle ?? ""
-            completion(text)
-        }
-        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
-        alert.addAction(doneAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
-    }
-    
-    private func showAlertWithSheetCategories(title: String, completion: @escaping (Category) -> Void) {
-        let alert = UIAlertController(title: title, 
-                                      message: nil, 
-                                      preferredStyle: .actionSheet)
-        self.categories.forEach { category in
-            let categoryAction = UIAlertAction(title: category.name, style: .default) { _ in
-                completion(category)
-            }
-            alert.addAction(categoryAction)
-        }
-        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
-    }
-    
-    // MARK: - Button Actions
+    // MARK: - Actions
     
     @objc 
     private func addButtonPressed(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Вы хотите создать задачу или категорию?", 
-                                      message: nil, 
-                                      preferredStyle: .alert)
-        let taskAction = UIAlertAction(title: "Задачу", style: .default) { _ in
-            self.addTaskPressed()
-        }
-        let categoryAction = UIAlertAction(title: "Категорию", style: .default) { _ in
-            self.addCategoryPressed()
-        }
-        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
-        alert.addAction(taskAction)
-        alert.addAction(categoryAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
+        self.showAlertWithActionsAndCancelAction(title: Constants.String.createOptions, actions: [
+            Action(title: Constants.String.task.capitalized) { [weak self] in
+                self?.createObject(of: .task)
+            },
+            Action(title: Constants.String.category.capitalized) { [weak self] in
+                self?.createObject(of: .category)
+            }
+        ])
     }
     
-    private func addTaskPressed() {
-        self.showAlertWithTextfield(title: Constants.String.createTask) { text in
-            self.showAlertWithSheetCategories(title: "Выберите категорию") { category in
-                self.crudManager.create(ofType: Task.self, withKeyValue: [
-                    "name": text,
-                    "isDone": false,
-                    "created": Date(),
-                    "category": category,
-                ]) 
-                self.updateTable()
+    private func pressHeaderView(on category: Category) {
+        self.showAlertWithActionsAndCancelAction(title: Constants.String.categoryOptions, 
+                                                 actions: [
+                                                    Action(title: Constants.String.update) { [weak self] in
+                                                        self?.updateObject(category)
+                                                    },
+                                                    Action(title: Constants.String.remove) { [weak self] in
+                                                        self?.removeObject(category)
+                                                    },
+                                                 ])
+    }
+    
+    private func createObject(of type: ObjectType) {
+        var title: String = "\(Constants.String.create) "
+        switch type {
+            case .task:
+                title.append(Constants.String.task.lowercased())
+            case .category:
+                title.append(Constants.String.category.lowercased())
+        }
+        
+        self.showAlertWithTextfield(title: title) { name in
+            switch type {
+                case .category:
+                    self.crudManager.create(ofType: Category.self, withKeyValue: [
+                        "name": name,
+                        "created": Date(),
+                        "tasks": NSSet(array: [])
+                    ])
+                    self.updateTable()
+                case .task:
+                    self.showAlertWithSheetOfActions(title: Constants.String.chooseCategory, 
+                                                     objects: self.categories) { category in
+                        self.crudManager.create(ofType: Task.self, withKeyValue: [
+                            "name": name,
+                            "isDone": false,
+                            "created": Date(),
+                            "category": category,
+                        ]) 
+                        self.updateTable()
+                    }
             }
         }
     }
     
-    private func addCategoryPressed() {
-        self.showAlertWithTextfield(title: "Создать категорию") { text in
-            self.crudManager.create(ofType: Category.self, withKeyValue: [
-                "name": text,
-                "created": Date(),
-                "tasks": NSSet(array: [])
-            ]) 
-            self.updateTable()
+    private func updateObject<T: ObjectWithName>(_ object: T) {
+        guard let type = ObjectType(object) else { return }
+        var title: String = "\(Constants.String.update) "
+        
+        switch type {
+            case .category:
+                title.append(Constants.String.category.lowercased())
+            case .task:
+                title.append(Constants.String.task.lowercased())
         }
-    }
-    
-    /// По нажатии на ячейку можно отредактировать задачу
-    private func cellPressed(on item: Task) {
-        self.showAlertWithTextfield(title: Constants.String.updateTask, defaultTitle: item.name) { text in
-            self.showAlertWithSheetCategories(title: "Выберите новую категорию") { category in
-                self.crudManager.update(item, withKeyValue: [
-                    "name": text,
-                    "category": category,
-                ])
-                self.updateTable()
+        self.showAlertWithTextfield(title: title, placeholder: object.name) { name in
+            switch type {
+                case .category:
+                    self.crudManager.update(object, withKeyValue: ["name": name])
+                    self.updateTable()
+                case .task:
+                    self.showAlertWithSheetOfActions(title: Constants.String.chooseNewCategory, 
+                                                     objects: self.categories) { category in
+                        self.crudManager.update(object, withKeyValue: [
+                            "name": name,
+                            "category": category
+                        ])
+                        self.updateTable()
+                    }
             }
         }
     }
-
-    private func trashCellPressed(on item: Task) {
-        let alert = UIAlertController(title: Constants.String.deleteTaskConfirmation, 
-                                      message: nil, 
-                                      preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: Constants.String.yesTitle, style: .default) { _ in
-            self.crudManager.delete(item)
-            self.updateTable()
-        }
-        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
-        alert.addAction(doneAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
-    }
     
-    private func pressedCheckmark(_ isDone: Bool, on item: Task) {
+    private func checkmarkTask(_ item: Task, isDone: Bool) {
         self.crudManager.update(item, withKeyValue: ["isDone": isDone])
+    }
+    
+    private func removeObject<T: ObjectWithName>(_ object: T) {
+        guard let type = ObjectType(object) else { return }
+        var title: String = "\(Constants.String.confirmation) \(Constants.String.remove.lowercased()) "
+        
+        switch type {
+            case .category:
+                title.append(Constants.String.category.lowercased())
+            case .task:
+                title.append(Constants.String.task.lowercased())
+        }
+        self.showAlertWithActionsAndCancelAction(title: title, actions: [
+            Action(title: Constants.String.yesTitle) { [weak self] in
+                self?.crudManager.delete(object)
+                self?.updateTable()
+            }
+        ])
     }
 }
 
@@ -196,8 +203,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return self.categories.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.categories[section].name
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let category = self.categories[section]
+        let action: Closure? = section == 0 ? { [weak self] in self?.showDisclaimerAlert(title: Constants.String.categoryDisclaimer) }
+                                            : { [weak self] in self?.pressHeaderView(on: category) }
+        let view = ClickableHeaderView(title: category.name, action: action)
+        return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -211,9 +222,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let task = tasks[indexPath.row]
         cell.title = task.name
         cell.isDone = task.isDone
-        cell.trashAction = { [weak self] in self?.trashCellPressed(on: task) }
-        cell.actions.done = { [weak self] in self?.pressedCheckmark(true, on: task) }
-        cell.actions.undone = { [weak self] in self?.pressedCheckmark(false, on: task) }
+        cell.trashAction = { [weak self] in self?.removeObject(task) }
+        cell.actions.done = { [weak self] in self?.checkmarkTask(task, isDone: true) }
+        cell.actions.undone = { [weak self] in self?.checkmarkTask(task, isDone: false) }
         return cell
     }
     
@@ -222,6 +233,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard var tasks = self.categories[indexPath.section].tasks.allObjects as? [Task] else { return }
         tasks = tasks.sorted(by: { $0.created < $1.created })
         let task = tasks[indexPath.row]
-        self.cellPressed(on: task)
+        self.updateObject(task)
     }
 }

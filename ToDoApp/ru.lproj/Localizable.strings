@@ -7,10 +7,22 @@
 */
 
 "Main.title" = "Список задач";
+
 "Common.cancelTitle" = "Отмена";
 "Common.okTitle" = "Ок";
 "Common.yesTitle" = "Да";
+"Common.createTitle" = "Создать";
+"Common.updateTitle" = "Обновить";
+"Common.removeTitle" = "Удалить";
+"Common.сonfirmationTitle" = "Вы уверены, что хотите";
+"Common.creationOptions" = "Вы хотите создать задачу или категорию?";
+
 "Category.default" = "Без категории";
-"Task.createTitle" = "Создайте задачу";
-"Task.updateTitle" = "Измените название задачи";
-"Task.removeConfirmationTitle" = "Вы уверены, что хотите удалить задачу?";
+"Category.options" = "Что вы хотите сделать с категорией?";
+"Category.choose" = "Выберите категорию";
+"Category.chooseNew" = "Выберите новую категорию";
+"Category.disclaimer" = "Категорию по умолчанию нельзя изменить или удалить";
+
+"Task.title" = "задачу";
+"Category.title" = "категорию";
+

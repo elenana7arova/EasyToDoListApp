@@ -13,12 +13,15 @@
 		B128559128CFA0F4008FA474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B128559028CFA0F4008FA474 /* Assets.xcassets */; };
 		B128559428CFA0F4008FA474 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B128559228CFA0F4008FA474 /* LaunchScreen.storyboard */; };
 		B12855A628CFC571008FA474 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12855A528CFC571008FA474 /* TaskTableViewCell.swift */; };
-		B12A5CDD28D9E3AC008D1583 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */; };
 		B12A5CDE28D9E3AC008D1583 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */; };
-		B12A5CDF28D9E3AC008D1583 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */; };
 		B12A5CE028D9E3AC008D1583 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */; };
+		B12A5CF728DA1326008D1583 /* ClickableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CF628DA1326008D1583 /* ClickableHeaderView.swift */; };
+		B12A5CFC28DA20EC008D1583 /* UIViewController+UIAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CFB28DA20EC008D1583 /* UIViewController+UIAlerts.swift */; };
 		B136F41C28D3D61A0034427E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B136F41E28D3D61A0034427E /* Localizable.strings */; };
 		B136F42328D3D70C0034427E /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B136F42228D3D70C0034427E /* String+Localized.swift */; };
+		B143274628DA303800CDB093 /* ObjectWithName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143274528DA303800CDB093 /* ObjectWithName.swift */; };
+		B143274928DA335800CDB093 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143274828DA335800CDB093 /* Action.swift */; };
+		B143274B28DA55BA00CDB093 /* ObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143274A28DA55BA00CDB093 /* ObjectType.swift */; };
 		B1EE045328D12E5900543CF6 /* CRUDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EE045228D12E5900543CF6 /* CRUDManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,13 +34,16 @@
 		B128559328CFA0F4008FA474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B128559528CFA0F4008FA474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B12855A528CFC571008FA474 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
-		B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B12A5CF628DA1326008D1583 /* ClickableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableHeaderView.swift; sourceTree = "<group>"; };
+		B12A5CFB28DA20EC008D1583 /* UIViewController+UIAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIAlerts.swift"; sourceTree = "<group>"; };
 		B136F41D28D3D61A0034427E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B136F42028D3D64F0034427E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B136F42228D3D70C0034427E /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
+		B143274528DA303800CDB093 /* ObjectWithName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectWithName.swift; sourceTree = "<group>"; };
+		B143274828DA335800CDB093 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		B143274A28DA55BA00CDB093 /* ObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectType.swift; sourceTree = "<group>"; };
 		B1EE045228D12E5900543CF6 /* CRUDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +94,7 @@
 				B12855A228CFA966008FA474 /* CoreData */,
 				B128558828CFA0F3008FA474 /* ViewController.swift */,
 				B128558428CFA0F3008FA474 /* AppDelegate.swift */,
+				B143274828DA335800CDB093 /* Action.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -95,6 +102,7 @@
 		B12855A228CFA966008FA474 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B143274728DA310F00CDB093 /* Protocols */,
 				B12A5CE128D9E3C3008D1583 /* Models */,
 				B1EE045228D12E5900543CF6 /* CRUDManager.swift */,
 			);
@@ -105,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				B12855A528CFC571008FA474 /* TaskTableViewCell.swift */,
+				B12A5CF628DA1326008D1583 /* ClickableHeaderView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -112,6 +121,7 @@
 		B12A5CE128D9E3C3008D1583 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B143274A28DA55BA00CDB093 /* ObjectType.swift */,
 				B128558D28CFA0F3008FA474 /* ToDoApp.xcdatamodeld */,
 				B12A5CE228D9E3D1008D1583 /* Task */,
 				B12A5CE328D9E3D8008D1583 /* Category */,
@@ -122,7 +132,6 @@
 		B12A5CE228D9E3D1008D1583 /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */,
 				B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */,
 			);
 			path = Task;
@@ -131,7 +140,6 @@
 		B12A5CE328D9E3D8008D1583 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */,
 				B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */,
 			);
 			path = Category;
@@ -141,8 +149,17 @@
 			isa = PBXGroup;
 			children = (
 				B136F42228D3D70C0034427E /* String+Localized.swift */,
+				B12A5CFB28DA20EC008D1583 /* UIViewController+UIAlerts.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B143274728DA310F00CDB093 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B143274528DA303800CDB093 /* ObjectWithName.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,14 +235,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B128558928CFA0F3008FA474 /* ViewController.swift in Sources */,
+				B143274928DA335800CDB093 /* Action.swift in Sources */,
+				B143274B28DA55BA00CDB093 /* ObjectType.swift in Sources */,
 				B128558528CFA0F3008FA474 /* AppDelegate.swift in Sources */,
-				B12A5CDD28D9E3AC008D1583 /* Task+CoreDataClass.swift in Sources */,
+				B12A5CFC28DA20EC008D1583 /* UIViewController+UIAlerts.swift in Sources */,
 				B136F42328D3D70C0034427E /* String+Localized.swift in Sources */,
 				B12855A628CFC571008FA474 /* TaskTableViewCell.swift in Sources */,
 				B1EE045328D12E5900543CF6 /* CRUDManager.swift in Sources */,
+				B143274628DA303800CDB093 /* ObjectWithName.swift in Sources */,
 				B12A5CDE28D9E3AC008D1583 /* Task+CoreDataProperties.swift in Sources */,
 				B12A5CE028D9E3AC008D1583 /* Category+CoreDataProperties.swift in Sources */,
-				B12A5CDF28D9E3AC008D1583 /* Category+CoreDataClass.swift in Sources */,
+				B12A5CF728DA1326008D1583 /* ClickableHeaderView.swift in Sources */,
 				B128558F28CFA0F3008FA474 /* ToDoApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
