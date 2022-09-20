@@ -89,12 +89,12 @@
 		B12855A128CFA957008FA474 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B143274C28DA5E4300CDB093 /* Models */,
 				B136F42128D3D6F10034427E /* Extensions */,
 				B12855A428CFC55E008FA474 /* Subviews */,
 				B12855A228CFA966008FA474 /* CoreData */,
 				B128558828CFA0F3008FA474 /* ViewController.swift */,
 				B128558428CFA0F3008FA474 /* AppDelegate.swift */,
-				B143274828DA335800CDB093 /* Action.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -160,6 +160,14 @@
 				B143274528DA303800CDB093 /* ObjectWithName.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B143274C28DA5E4300CDB093 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B143274828DA335800CDB093 /* Action.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

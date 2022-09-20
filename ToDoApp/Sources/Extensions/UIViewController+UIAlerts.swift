@@ -12,7 +12,6 @@ extension UIViewController {
         enum String {
             static let cancelTitle = "Common.cancelTitle".localized
             static let okTitle = "Common.okTitle".localized
-            static let yesTitle = "Common.yesTitle".localized
         }
     }
     
