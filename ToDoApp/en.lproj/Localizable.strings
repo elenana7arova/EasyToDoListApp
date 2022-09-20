@@ -10,6 +10,7 @@
 "Common.cancelTitle" = "Cancel";
 "Common.okTitle" = "Ok";
 "Common.yesTitle" = "Yes";
+"Category.default" = "Uncategorized";
 "Task.createTitle" = "Create a task";
 "Task.updateTitle" = "Update the name of the task";
 "Task.removeConfirmationTitle" = "Are you sure you want to delete the task?";

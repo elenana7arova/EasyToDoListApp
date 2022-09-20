@@ -12,9 +12,11 @@
 		B128558F28CFA0F3008FA474 /* ToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B128558D28CFA0F3008FA474 /* ToDoApp.xcdatamodeld */; };
 		B128559128CFA0F4008FA474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B128559028CFA0F4008FA474 /* Assets.xcassets */; };
 		B128559428CFA0F4008FA474 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B128559228CFA0F4008FA474 /* LaunchScreen.storyboard */; };
-		B128559F28CFA928008FA474 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128559D28CFA928008FA474 /* Task+CoreDataClass.swift */; };
-		B12855A028CFA928008FA474 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128559E28CFA928008FA474 /* Task+CoreDataProperties.swift */; };
 		B12855A628CFC571008FA474 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12855A528CFC571008FA474 /* TaskTableViewCell.swift */; };
+		B12A5CDD28D9E3AC008D1583 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */; };
+		B12A5CDE28D9E3AC008D1583 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */; };
+		B12A5CDF28D9E3AC008D1583 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */; };
+		B12A5CE028D9E3AC008D1583 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */; };
 		B136F41C28D3D61A0034427E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B136F41E28D3D61A0034427E /* Localizable.strings */; };
 		B136F42328D3D70C0034427E /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B136F42228D3D70C0034427E /* String+Localized.swift */; };
 		B1EE045328D12E5900543CF6 /* CRUDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EE045228D12E5900543CF6 /* CRUDManager.swift */; };
@@ -28,9 +30,11 @@
 		B128559028CFA0F4008FA474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B128559328CFA0F4008FA474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B128559528CFA0F4008FA474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B128559D28CFA928008FA474 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B128559E28CFA928008FA474 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B12855A528CFC571008FA474 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B136F41D28D3D61A0034427E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B136F42028D3D64F0034427E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B136F42228D3D70C0034427E /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
@@ -91,20 +95,10 @@
 		B12855A228CFA966008FA474 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B12A5CE128D9E3C3008D1583 /* Models */,
 				B1EE045228D12E5900543CF6 /* CRUDManager.swift */,
-				B12855A328CFA976008FA474 /* Task */,
-				B128558D28CFA0F3008FA474 /* ToDoApp.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		B12855A328CFA976008FA474 /* Task */ = {
-			isa = PBXGroup;
-			children = (
-				B128559D28CFA928008FA474 /* Task+CoreDataClass.swift */,
-				B128559E28CFA928008FA474 /* Task+CoreDataProperties.swift */,
-			);
-			path = Task;
 			sourceTree = "<group>";
 		};
 		B12855A428CFC55E008FA474 /* Subviews */ = {
@@ -113,6 +107,34 @@
 				B12855A528CFC571008FA474 /* TaskTableViewCell.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		B12A5CE128D9E3C3008D1583 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B128558D28CFA0F3008FA474 /* ToDoApp.xcdatamodeld */,
+				B12A5CE228D9E3D1008D1583 /* Task */,
+				B12A5CE328D9E3D8008D1583 /* Category */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B12A5CE228D9E3D1008D1583 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				B12A5CD928D9E3AC008D1583 /* Task+CoreDataClass.swift */,
+				B12A5CDA28D9E3AC008D1583 /* Task+CoreDataProperties.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		B12A5CE328D9E3D8008D1583 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B12A5CDB28D9E3AC008D1583 /* Category+CoreDataClass.swift */,
+				B12A5CDC28D9E3AC008D1583 /* Category+CoreDataProperties.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		B136F42128D3D6F10034427E /* Extensions */ = {
@@ -197,11 +219,13 @@
 			files = (
 				B128558928CFA0F3008FA474 /* ViewController.swift in Sources */,
 				B128558528CFA0F3008FA474 /* AppDelegate.swift in Sources */,
+				B12A5CDD28D9E3AC008D1583 /* Task+CoreDataClass.swift in Sources */,
 				B136F42328D3D70C0034427E /* String+Localized.swift in Sources */,
 				B12855A628CFC571008FA474 /* TaskTableViewCell.swift in Sources */,
-				B128559F28CFA928008FA474 /* Task+CoreDataClass.swift in Sources */,
 				B1EE045328D12E5900543CF6 /* CRUDManager.swift in Sources */,
-				B12855A028CFA928008FA474 /* Task+CoreDataProperties.swift in Sources */,
+				B12A5CDE28D9E3AC008D1583 /* Task+CoreDataProperties.swift in Sources */,
+				B12A5CE028D9E3AC008D1583 /* Category+CoreDataProperties.swift in Sources */,
+				B12A5CDF28D9E3AC008D1583 /* Category+CoreDataClass.swift in Sources */,
 				B128558F28CFA0F3008FA474 /* ToDoApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

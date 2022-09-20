@@ -10,6 +10,7 @@
 "Common.cancelTitle" = "Отмена";
 "Common.okTitle" = "Ок";
 "Common.yesTitle" = "Да";
+"Category.default" = "Без категории";
 "Task.createTitle" = "Создайте задачу";
 "Task.updateTitle" = "Измените название задачи";
 "Task.removeConfirmationTitle" = "Вы уверены, что хотите удалить задачу?";

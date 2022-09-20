@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var tableView: UITableView?
     private let crudManager = CRUDManager()
-    private var tasks = [Task]()
+    private var categories = [Category]()
     private enum Constants {
         enum String {
             static let title = "Main.title".localized
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tasks = crudManager.allItems(ofType: Task.self) as! [Task]
+        self.categories = crudManager.allItems(ofType: Category.self) as! [Category]
         self.setupNav()
         self.createTable()
     }
@@ -68,8 +68,8 @@ class ViewController: UIViewController {
     }
     
     private func updateTable() {
-        let tasks = crudManager.allItems(ofType: Task.self) as! [Task]
-        self.tasks = tasks.sorted(by: { $0.created < $1.created })
+        let categories = crudManager.allItems(ofType: Category.self) as! [Category]
+        self.categories = categories.sorted(by: { $0.created < $1.created })
         
         DispatchQueue.main.async { [weak self] in
             self?.tableView?.reloadData()
@@ -96,24 +96,76 @@ class ViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    private func showAlertWithSheetCategories(title: String, completion: @escaping (Category) -> Void) {
+        let alert = UIAlertController(title: title, 
+                                      message: nil, 
+                                      preferredStyle: .actionSheet)
+        self.categories.forEach { category in
+            let categoryAction = UIAlertAction(title: category.name, style: .default) { _ in
+                completion(category)
+            }
+            alert.addAction(categoryAction)
+        }
+        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
     // MARK: - Button Actions
     
     @objc 
     private func addButtonPressed(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Вы хотите создать задачу или категорию?", 
+                                      message: nil, 
+                                      preferredStyle: .alert)
+        let taskAction = UIAlertAction(title: "Задачу", style: .default) { _ in
+            self.addTaskPressed()
+        }
+        let categoryAction = UIAlertAction(title: "Категорию", style: .default) { _ in
+            self.addCategoryPressed()
+        }
+        let cancelAction = UIAlertAction(title: Constants.String.cancelTitle, style: .cancel)
+        alert.addAction(taskAction)
+        alert.addAction(categoryAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
+    private func addTaskPressed() {
         self.showAlertWithTextfield(title: Constants.String.createTask) { text in
-            self.crudManager.create(ofType: Task.self, withKeyValue: [
+            self.showAlertWithSheetCategories(title: "Выберите категорию") { category in
+                self.crudManager.create(ofType: Task.self, withKeyValue: [
+                    "name": text,
+                    "isDone": false,
+                    "created": Date(),
+                    "category": category,
+                ]) 
+                self.updateTable()
+            }
+        }
+    }
+    
+    private func addCategoryPressed() {
+        self.showAlertWithTextfield(title: "Создать категорию") { text in
+            self.crudManager.create(ofType: Category.self, withKeyValue: [
                 "name": text,
-                "isDone": false,
-                "created": Date()
+                "created": Date(),
+                "tasks": NSSet(array: [])
             ]) 
             self.updateTable()
         }
     }
     
+    /// По нажатии на ячейку можно отредактировать задачу
     private func cellPressed(on item: Task) {
         self.showAlertWithTextfield(title: Constants.String.updateTask, defaultTitle: item.name) { text in
-            self.crudManager.update(item, withKeyValue: ["name": text])
-            self.updateTable()
+            self.showAlertWithSheetCategories(title: "Выберите новую категорию") { category in
+                self.crudManager.update(item, withKeyValue: [
+                    "name": text,
+                    "category": category,
+                ])
+                self.updateTable()
+            }
         }
     }
 
@@ -140,13 +192,23 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.categories[section].name
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tasks.count
+        return self.categories[section].tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.String.cellID, for: indexPath) as! TaskTableViewCell
-        let task = self.tasks[indexPath.row]
+        guard var tasks = self.categories[indexPath.section].tasks.allObjects as? [Task] else { return cell }
+        tasks = tasks.sorted(by: { $0.created < $1.created })
+        let task = tasks[indexPath.row]
         cell.title = task.name
         cell.isDone = task.isDone
         cell.trashAction = { [weak self] in self?.trashCellPressed(on: task) }
@@ -157,7 +219,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let task = self.tasks[indexPath.row]
+        guard var tasks = self.categories[indexPath.section].tasks.allObjects as? [Task] else { return }
+        tasks = tasks.sorted(by: { $0.created < $1.created })
+        let task = tasks[indexPath.row]
         self.cellPressed(on: task)
     }
 }

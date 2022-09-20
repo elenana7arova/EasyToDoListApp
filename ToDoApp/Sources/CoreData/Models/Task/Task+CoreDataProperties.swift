@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  ToDoApp
 //
-//  Created by Elena Nazarova on 12.09.2022.
+//  Created by Elena Nazarova on 20.09.2022.
 //
 //
 
@@ -15,12 +15,13 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Task")
     }
 
-    @NSManaged public var name: String
     @NSManaged public var created: Date
     @NSManaged public var isDone: Bool
+    @NSManaged public var name: String
+    @NSManaged public var category: Category
 
 }
 
-extension Task: Identifiable {
+extension Task : Identifiable {
 
 }

@@ -10,6 +10,16 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private let userDefaults = UserDefaults.standard
+    private let crudManager = CRUDManager()
+    private var isFirstLaunch: Bool {
+        return self.userDefaults.bool(forKey: Constants.isFirstLaunchKey)
+    }
+    private enum Constants {
+        static let isFirstLaunchKey = "isFirstLaunch"
+        static let defaultCategoryName = "Category.default".localized
+    }
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -21,8 +31,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.navigationBar.prefersLargeTitles = true
         window.rootViewController = navController
         window.makeKeyAndVisible()
+        self.setUserDefaults()
+        self.createDefaultData()
         self.window = window
         return true
+    }
+    
+    private func setUserDefaults() {
+        guard !self.isFirstLaunch else { return }
+        self.userDefaults.set(true, forKey: Constants.isFirstLaunchKey)
+    }
+    
+    private func createDefaultData() {
+        guard !self.isFirstLaunch else { return }
+        self.crudManager.create(ofType: Category.self, withKeyValue: [
+            "name": Constants.defaultCategoryName,
+            "created": Date(),
+            "tasks": NSSet(array: [])
+        ])
     }
 
     // MARK: - Core Data stack

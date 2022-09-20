@@ -2,7 +2,7 @@
 //  Task+CoreDataClass.swift
 //  ToDoApp
 //
-//  Created by Elena Nazarova on 12.09.2022.
+//  Created by Elena Nazarova on 20.09.2022.
 //
 //
 
